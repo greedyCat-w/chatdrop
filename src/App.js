@@ -376,7 +376,7 @@ function App() {
       </div>
       <form className='message-controls' onSubmit={handleSend}>
             <StatusButton stopped={stopped} alone={alone} handler={handleConnectAndStop}/>
-            <Form.Control placeholder="Add your item here..." autoFocus ref={messageRef} disabled={!connected}/>
+            <Form.Control placeholder="type your message here..." autoFocus ref={messageRef} disabled={!connected}/>
             <Button type='submit' variant="secondary" disabled={!connected} >Send</Button>
       </form>
     </div>
