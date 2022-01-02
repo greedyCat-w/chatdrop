@@ -189,7 +189,7 @@ function App() {
               handleDisconnect()
               connect()
               console.log('attempting reconnect')
-            },3000)
+            },80000)
           }else{
             handleDisconnect()
             connect()
