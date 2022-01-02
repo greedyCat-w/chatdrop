@@ -279,6 +279,7 @@ function App() {
       if(mediaSenderRef.current){
         mediaSenderRef.current.replaceTrack(stream.getVideoTracks()[0])
       }else{
+        if(peerRef.current)
         mediaSenderRef.current = peerRef.current.addTrack(stream.getVideoTracks()[0],myStream.current)
       }
       setVideo(video=>!video)
