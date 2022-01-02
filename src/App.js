@@ -39,6 +39,7 @@ function App() {
   const [partnerScreen,setPartnerScreen] = useState(false)
   const myVideo = useRef()
   const partnerVideo = useRef()
+  const partnerAudio = useRef()
   const videoButton = useRef()
   const audioButton = useRef()
   const screenButton = useRef()
@@ -316,7 +317,6 @@ function App() {
         mediaSenderRef.current.track.stop()
         myStream.current.removeTrack(screenTrackRef.current)
         dataChannelRef.current.send('&(*&(&^')
-        myVideo.current.srcObject = myStream.current
     }
     setScreen(screen=>!screen)
   }
@@ -353,10 +353,11 @@ function App() {
         onHide={() => setModalShow(false)}
       />
       <div className="header">
-          Chat Drop <p style={{float: 'right'}}>users online: </p>
+          Chat Drop <p style={{float: 'right'}}>made with webRTC :)</p>
       </div>
       <div className='content-small'>
         <video autoPlay className={partnerScreen?'':'mirror'} controls={partnerScreen?true:false} ref={partnerVideo} />
+        <audio autoPlay ref={partnerAudio}/>
       </div>
       <div className='content-small'>
         <video autoPlay muted className='mirror' ref={myVideo}/>
