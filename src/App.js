@@ -39,7 +39,6 @@ function App() {
   const [partnerScreen,setPartnerScreen] = useState(false)
   const myVideo = useRef()
   const partnerVideo = useRef()
-  const partnerAudio = useRef()
   const videoButton = useRef()
   const audioButton = useRef()
   const screenButton = useRef()
@@ -95,6 +94,9 @@ function App() {
       partnerVideo.current.srcObject = undefined
       mediaSenderRef.current = undefined
       setMessages(()=>[])
+      if(screen){
+        screenToggle()
+      }
   }
 
   function callOtherUser(){
@@ -357,7 +359,6 @@ function App() {
       </div>
       <div className='content-small'>
         <video autoPlay className={partnerScreen?'':'mirror'} controls={partnerScreen?true:false} ref={partnerVideo} />
-        <audio autoPlay ref={partnerAudio}/>
       </div>
       <div className='content-small'>
         <video autoPlay muted className='mirror' ref={myVideo}/>
