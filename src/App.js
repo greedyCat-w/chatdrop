@@ -307,6 +307,7 @@ function App() {
         if(mediaSenderRef.current){
           mediaSenderRef.current.replaceTrack(screenTrackRef.current)
         }else{
+          if(peerRef.current)
           mediaSenderRef.current = peerRef.current.addTrack(screenTrackRef.current,myStream.current)
         }
         screenTrackRef.current.onended = onScreenShareEnded
