@@ -25,7 +25,7 @@ io.on('connection',socket => {
         socket = availableUsers[selected]
         availableUsers.splice(selected,1)
 
-        socket.emit('ack','finding a user for you')
+        socket.emit('ack','finding a user')
         onlineUsers.push(socket)
         socket.on('join',()=>{
             let unfilledRooms = rooms.filter((room)=>{
