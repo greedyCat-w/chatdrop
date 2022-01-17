@@ -370,9 +370,9 @@ function App() {
         <div ref={messagesBottom}></div>
       </div>
       <div className='media-controls'>
-        <Button variant='outline-light' src={video?videopng:novideopng} disabled={connected} as='img' onClick={videoToggle} ref={videoButton}/>
-        <Button variant='outline-light' src={audio?audiopng:noaudiopng} disabled={connected} as='img' onClick={audioToggle} ref={audioButton}/>
-        <Button variant='outline-light' src={screenpng} disabled={connected} as='img' onClick={screenToggle} ref={screenButton}/>
+        <Button variant='outline-light' src={video?videopng:novideopng} as='img' onClick={videoToggle} ref={videoButton}/>
+        <Button variant='outline-light' src={audio?audiopng:noaudiopng} as='img' onClick={audioToggle} ref={audioButton}/>
+        <Button variant='outline-light' src={screenpng}  as='img' onClick={screenToggle} ref={screenButton}/>
       </div>
       <form className='message-controls' onSubmit={handleSend}>
             <StatusButton stopped={stopped} alone={alone} handler={handleConnectAndStop}/>
