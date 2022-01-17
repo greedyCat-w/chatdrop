@@ -180,10 +180,9 @@ function App() {
         sdp: peerRef.current.localDescription
       }
       console.log('sending answer')
-      socketRef.current.emit('answer',payload,({ok})=>{
+      socketRef.current.emit('answer',payload,()=>{
         console.log(dataChannelRef.current && dataChannelRef.current.readyState)
         if(!dataChannelRef.current || !dataChannelRef.current.readyState==='open'){
-          if(ok) {
             console.log('setting up timer 1')
             connecTimerRef.current = setTimeout(()=>{
               console.log(dataChannelRef)
@@ -191,10 +190,6 @@ function App() {
               connect()
               console.log('attempting reconnect')
             },80000)
-          }else{
-            handleDisconnect()
-            connect()
-          }
         }
       })
     }catch(e){
