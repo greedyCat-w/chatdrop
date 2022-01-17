@@ -357,7 +357,7 @@ function App() {
           Chat Drop <p style={{float: 'right'}}>made with webRTC :)</p>
       </div>
       <div className='content-small'>
-        <video autoPlaycontrols={partnerScreen?true:false} ref={partnerVideo} />
+        <video autoPlay controls={partnerScreen?true:false} ref={partnerVideo} />
       </div>
       <div className='content-small'>
         <video autoPlay muted ref={myVideo}/>
