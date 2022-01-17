@@ -186,6 +186,7 @@ function App() {
           if(ok) {
             console.log('setting up timer 1')
             connecTimerRef.current = setTimeout(()=>{
+              console.log(dataChannelRef)
               handleDisconnect()
               connect()
               console.log('attempting reconnect')
@@ -315,20 +316,22 @@ function App() {
           videoToggle()
         }
         myStream.current.addTrack(screenTrackRef.current)
-        dataChannelRef.current.send('&(*&(&^')
     }else{
-        mediaSenderRef.current.track.stop()
+        screenTrackRef.current.stop()
         myStream.current.removeTrack(screenTrackRef.current)
-        dataChannelRef.current.send('&(*&(&^')
     }
     setScreen(screen=>!screen)
+    if(connected)
+      dataChannelRef.current.send('&(*&(&^')
   }
 
   async function onScreenShareEnded(){
-    mediaSenderRef.current.track.stop()
+    screenTrackRef.current.stop()
+    if(connected){
+      dataChannelRef.current.send('&(*&(&^')
+    }
     myStream.current.removeTrack(screenTrackRef.current)
     setScreen(false)
-    dataChannelRef.current.send('&(*&(&^')
   }
 
   useEffect(()=>{
@@ -359,10 +362,10 @@ function App() {
           Chat Drop <p style={{float: 'right'}}>made with webRTC :)</p>
       </div>
       <div className='content-small'>
-        <video autoPlay className={partnerScreen?'':'mirror'} controls={partnerScreen?true:false} ref={partnerVideo} />
+        <video autoPlaycontrols={partnerScreen?true:false} ref={partnerVideo} />
       </div>
       <div className='content-small'>
-        <video autoPlay muted className='mirror' ref={myVideo}/>
+        <video autoPlay muted ref={myVideo}/>
       </div>
       <div className='message-window' >
         {messages.map(({message,me},index)=>{
@@ -372,9 +375,9 @@ function App() {
         <div ref={messagesBottom}></div>
       </div>
       <div className='media-controls'>
-        <Button variant='outline-light' src={video?videopng:novideopng} as='img' onClick={videoToggle} ref={videoButton}/>
-        <Button variant='outline-light' src={audio?audiopng:noaudiopng} as='img' onClick={audioToggle} ref={audioButton}/>
-        <Button variant='outline-light' src={screenpng} as='img' onClick={screenToggle} ref={screenButton}/>
+        <Button variant='outline-light' src={video?videopng:novideopng} disabled={connected} as='img' onClick={videoToggle} ref={videoButton}/>
+        <Button variant='outline-light' src={audio?audiopng:noaudiopng} disabled={connected} as='img' onClick={audioToggle} ref={audioButton}/>
+        <Button variant='outline-light' src={screenpng} disabled={connected} as='img' onClick={screenToggle} ref={screenButton}/>
       </div>
       <form className='message-controls' onSubmit={handleSend}>
             <StatusButton stopped={stopped} alone={alone} handler={handleConnectAndStop}/>
